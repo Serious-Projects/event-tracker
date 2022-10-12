@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+
+{% block content %}
+   <section>
+      <h1>Events</h1>
+      <div class="events-list">
+         {% for event in events %}
+            <a href="{% url 'event' event.id %}">
+               <div>{{ event.name }}</div>
+            </a>
+         {% endfor %}
+      </div>
+   </section>
+   
+   <section>
+      <h1>Users</h1>
+      <div class="events-list">
+         {% for user in users %}
+            <a href="{% url 'profile' user.id %}">
+               <div>{{ user.name }}</div>
+            </a>
+         {% endfor %}
+      </div>
+   </section>
+{% endblock content %}

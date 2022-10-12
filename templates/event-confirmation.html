@@ -1,0 +1,9 @@
+{% extends 'index.html' %}
+
+{% block content %}
+   <form method="post" accept-charset="utf-8">
+      {% csrf_token %}
+      <a href="{% url 'event' event.id %}">Go Back</a>
+      <input type="submit" name="register" value="Confirm Registration" />
+   </form>
+{% endblock content %}

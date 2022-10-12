@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+
+{% block content %}
+   <h2>My Account</h2>
+   
+   <div>
+      <h3>My Events</h3>
+      {% for event in user.events.all %}
+         <a href="{% url 'event' event.id %}">{{ event.name }}</a>
+      {% endfor %}
+   </div>
+   
+   <div>
+      <h3>My Submissions</h3>
+      {% for sub in user.submissions.all %}
+         <a href="{% url 'update-submission' sub.id %}">{{ sub.event.name }}</a>
+      {% endfor %}
+   </div>
+{% endblock content %}
