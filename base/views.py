@@ -11,26 +11,28 @@ def login_page(request):
    if request.method == "POST":
       email = request.POST.get("email")
       password = request.POST.get("password")
-      print(email, password)
       user = authenticate(email=email, password=password)
       if user is not None:
          login(request, user)
          return redirect("home")
       else:
-         print("User:", user)
-   context = { "page": page }
-   return render(request, "login-register.html", context)
+         return redirect("login")
+   return render(request, "login-register.html", { "page": page })
 
 def register_page(request):
    page = "register"
+   form = RegistrationForm()
    if request.method == "POST":
       form = RegistrationForm(request.POST)
       if form.is_valid():
          user = form.save(commit=False)
          user.save()
          login(request, user)
-         return redirect("login")
-   return render(request, "login-register.html", { "page": page })
+         return redirect("home")
+      else:
+         print("Errors:", form.errors.as_data())
+   context = { "page": page, "form": form }
+   return render(request, "login-register.html", context)
 
 def logout_page(request):
    logout(request)
