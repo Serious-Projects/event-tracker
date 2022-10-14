@@ -1,25 +1,52 @@
 {% extends 'index.html' %}
 
 {% block content %}
-   <section>
-      <h1>Events</h1>
-      <div class="events-list">
-         {% for event in events %}
-            <a href="{% url 'event' event.id %}">
-               <div>{{ event.name }}</div>
-            </a>
-         {% endfor %}
+   <section id="home-section" class="container">
+      <div>
+         <div class="mt-2 mb-3">
+            <h1>Events</h1>
+            <div class="row g-3">
+               {% for event in events %}
+                  <div class="col-sm-12 col-md-6 col-lg-6 text-center">
+                     <div class="border rounded py-3">
+                        <a href="{% url 'event' event.id %}" class="d-block" style="font-size:1.2rem;">{{ event.name }}</a>
+                        <div class="d-flex justify-content-around align-items-center mt-1">
+                           <div class="flex-grow-1 py-2 text-center">
+                              <strong class="display-6">{{ event.participants.count }}</strong>
+                              <br />
+                              <span style="font-size:0.8rem;">Registered</span>
+                           </div>
+                           <div class="flex-grow-1 border-start py-2 text-center">
+                              <span style="font-size:1rem;">{{ event.registration_deadline }}</span>
+                              <br />
+                              <span style="font-size:0.8rem;">Registration Deadline</span>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               {% endfor %}
+            </div>
+         </div>
       </div>
-   </section>
-   
-   <section>
-      <h1>Users</h1>
-      <div class="events-list">
-         {% for user in users %}
-            <a href="{% url 'profile' user.id %}">
-               <div>{{ user.name }}</div>
-            </a>
-         {% endfor %}
+      
+      <div class="mt-4">
+         <div class="container mt-2 mb-3" id="users-section">
+            <h1>Participants</h1>
+            <div class="row g-2">
+               {% for user in users %}
+                  <div class="col-6 col-sm-6 col-md-3">
+                     <div class="border rounded mx-auto user-card">
+                        <a href="{% url 'profile' user.id %}" class="user-box">
+                           <div class="rounded pb-2 text-center">
+                              <img src="{{ user.avatar.url }}" alt="Avatar Image" class="img-fluid border mt-2" />
+                              <h5 class="mt-2">{{ user.name }}</h5>
+                           </div>
+                        </a>
+                     </div>
+                  </div>
+               {% endfor %}
+            </div>
+         </div>
       </div>
    </section>
 {% endblock content %}

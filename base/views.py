@@ -11,16 +11,18 @@ def login_page(request):
    if request.method == "POST":
       email = request.POST.get("email")
       password = request.POST.get("password")
+      print(email, password)
       user = authenticate(email=email, password=password)
       if user is not None:
          login(request, user)
-         return redirect("index")
+         return redirect("home")
+      else:
+         print("User:", user)
    context = { "page": page }
    return render(request, "login-register.html", context)
 
 def register_page(request):
    page = "register"
-   form = RegistrationForm()
    if request.method == "POST":
       form = RegistrationForm(request.POST)
       if form.is_valid():
@@ -28,8 +30,7 @@ def register_page(request):
          user.save()
          login(request, user)
          return redirect("login")
-   context = { "page": page, "form": form }
-   return render(request, "login-register.html", context)
+   return render(request, "login-register.html", { "page": page })
 
 def logout_page(request):
    logout(request)
@@ -43,8 +44,11 @@ def index_page(request):
 
 def event_page(request, pk):
    event = Event.objects.get(id=pk)
-   has_registered = request.user.events.filter(id=event.id).exists()
-   submitted = Submission.objects.filter(participant=request.user, event=event).exists()
+   has_registered = False
+   submitted = False
+   if request.user.is_authenticated:
+      has_registered = request.user.events.filter(id=event.id).exists()
+      submitted = Submission.objects.filter(participant=request.user, event=event).exists()
    context = {
       "event": event,
       "has_registered": has_registered,
@@ -73,7 +77,6 @@ def account_page(request):
 @login_required(login_url="/login")
 def project_submission_page(request, pk):
    event = Event.objects.get(id=pk)
-   form = SubmissionForm()
    if request.method == "POST":
       form = SubmissionForm(request.POST)
       if form.is_valid():
@@ -82,8 +85,7 @@ def project_submission_page(request, pk):
          submission.event = event
          submission.save()
          return redirect("account")
-   context = { "event": event, "form": form }
-   return render(request, "submit-form.html", context)
+   return render(request, "submit-form.html", { "event": event })
 
 @login_required(login_url="/login")
 def update_submission(request, pk):
@@ -91,10 +93,8 @@ def update_submission(request, pk):
    if request.user != submission.participant:
       return HttpResponse("You can't be here...")
    event = submission.event
-   form = SubmissionForm(instance=submission)
    if request.method == "POST":
       form = SubmissionForm(request.POST, instance=submission)
       form.save()
       return redirect("account")
-   context = { "event": event, "form": form }
-   return render(request, "submit-form.html", context)
+   return render(request, "submit-form.html", { "event": event, "details": submission.details })

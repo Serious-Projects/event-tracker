@@ -3,7 +3,7 @@ from . import views
 
 # Define your routes here
 urlpatterns = [
-   path("", views.index_page, name="index"),
+   path("", views.index_page, name="home"),
    
    # ------------------------------------------------------------------------------------------------
    # Authentication Routes

@@ -1,13 +1,17 @@
 {% extends 'index.html' %}
 
 {% block content %}
-   <h4>Submit Project For {{ event.name }}</h4>
-   
-   <div>
-      <form method="POST">
+   <div class="container">
+      <h4 class="mt-3 mt-md-5">Submit Project For "{{ event.name }}"</h4>
+      <form method="POST" class="mt-4">
          {% csrf_token %}
-         {{ form.as_p }}
-         <input type="submit" value="Submit" />
+         <div class="mb-3">
+            <label for="details" class="form-label">Enter your project details</label>
+            <textarea name="details" id="details" rows="5" class="form-control" placeholder="Details...">{{ details }}</textarea>
+         </div>
+         <div>
+            <button type="submit" class="btn btn-warning w-100">Submit</button>
+         </div>
       </form>
    </div>
 {% endblock content %}

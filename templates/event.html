@@ -1,29 +1,44 @@
 {% extends 'index.html' %}
 
 {% block content %}
-   <h1>{{ event.name }}</h1>
-   {% if has_registered %}
-      <p>You have already registered for this event.</p>
-   {% else %}
-      <a href="{% url 'event-confirmation' event.id %}">Register For An Event</a>
-   {% endif %}
-   
-   {% if submitted %}
-      <p>You have already submitted your project.</p>
-   {% else %}
-      <a href="{% url 'project-submission' event.id %}">Submit Project</a>
-   {% endif %}
-   
-   <p>{{ event.description }}</p>
-   
-   <div>
-      <h2>Event Participants</h2>
-      <div>
-         {% for participant in event.participants.all %}
-            <div>
-               <strong>{{ participant.name }}</strong>
+   <section class="container">
+      <h1>{{ event.name }}</h1>
+      
+      <p>{{ event.description|linebreaks|urlize }}</p>
+      
+      {% if has_registered %}
+         {% if submitted %}
+            <p class="py-2 ps-2 text-success border-top border-bottom">
+               You have registered for this event & 
+               You have submitted your project.
+            </p>
+         {% else %}
+            <a href="{% url 'project-submission' event.id %}" class="btn btn-secondary w-100">
+               Submit Project
+            </a>
+         {% endif %}
+      {% else %}
+         <a href="{% url 'event-confirmation' event.id %}">Register For An Event</a>
+      {% endif %}
+      
+      <div class="mt-4">
+         <h2>Event Participants</h2>
+         <div>
+            <div class="row">
+            {% for participant in event.participants.all %}
+               <div class="col-6 col-sm-6 col-md-3">
+                  <div class="border rounded mx-auto user-card">
+                     <a href="{% url 'profile' participant.id %}" class="user-box">
+                        <div class="rounded pb-2 text-center">
+                           <img src="{{ participant.avatar.url }}" alt="Avatar Image" class="img-fluid border mt-2" />
+                           <h5 class="mt-2">{{ participant.name }}</h5>
+                        </div>
+                     </a>
+                  </div>
+               </div>
+            {% endfor %}
             </div>
-         {% endfor %}
+         </div>
       </div>
-   </div>
+   </section>
 {% endblock content %}
