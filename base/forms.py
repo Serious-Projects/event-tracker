@@ -6,9 +6,9 @@ from .models import Submission, User
 class SubmissionForm(ModelForm):
    class Meta:
       model = Submission
-      fields = ["details"]
+      fields = ['details']
 
 class RegistrationForm(UserCreationForm):
    class Meta:
       model = User
-      fields = ["username", "email", "name", "password1", "password2"]
+      fields = ['username', 'email', 'name', 'password1', 'password2']
