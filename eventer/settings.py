@@ -1,15 +1,8 @@
 import os
 from pathlib import Path
-import environ
-
-# Setting environmental configurations
-env = environ.Env(DEBUG=(bool, False))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-# Read environment variables from .env file
-environ.Env.read_env()
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-e0f=x%43*4ge9yuzluej&cy(-wgih=wl3b(ali5nv!*0a)cm2y'
@@ -80,11 +73,11 @@ WSGI_APPLICATION = 'eventer.wsgi.application'
 DATABASES = {
    'default': {
       'ENGINE': 'django.db.backends.postgresql',
-      'NAME': env('PGDATABASE'),
-      'USER': env('PGUSER'),
-      'PASSWORD': env('PGPASSWORD'),
-      'HOST': env('PGHOST'),
-      'PORT': env('PGPORT'),
+      'NAME': os.environ.get('PGDATABASE'),
+      'USER': os.environ.get('PGUSER'),
+      'PASSWORD': os.environ.get('PGPASSWORD'),
+      'HOST': os.environ.get('PGHOST'),
+      'PORT': os.environ.get('PGPORT'),
    }
 }
 
