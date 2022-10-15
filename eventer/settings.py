@@ -125,7 +125,6 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_TRUSTED_ORIGINS = [
-   'http://127.0.0.1:8000', # Testing purposes
    'https://web-production-9860.up.railway.app',
    'https://eventer.up.railway.app',
 ]
