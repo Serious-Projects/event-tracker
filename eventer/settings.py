@@ -1,8 +1,13 @@
 import os
 from pathlib import Path
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Setting environment configurations
+env = environ.Env()
+environ.Env.read_env()
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-e0f=x%43*4ge9yuzluej&cy(-wgih=wl3b(ali5nv!*0a)cm2y'
@@ -10,7 +15,10 @@ SECRET_KEY = 'django-insecure-e0f=x%43*4ge9yuzluej&cy(-wgih=wl3b(ali5nv!*0a)cm2y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://eventer.up.railway.app']
+ALLOWED_HOSTS = [
+   '127.0.0.1',
+   'eventer.up.railway.app',
+]
 
 # Admin User Model
 AUTH_USER_MODEL = 'base.User'
@@ -73,11 +81,11 @@ WSGI_APPLICATION = 'eventer.wsgi.application'
 DATABASES = {
    'default': {
       'ENGINE': 'django.db.backends.postgresql',
-      'NAME': os.environ.get('PGDATABASE'),
-      'USER': os.environ.get('PGUSER'),
-      'PASSWORD': os.environ.get('PGPASSWORD'),
-      'HOST': os.environ.get('PGHOST'),
-      'PORT': os.environ.get('PGPORT'),
+      'NAME': env('PGDATABASE'),
+      'USER': env('PGUSER'),
+      'PASSWORD': env('PGPASSWORD'),
+      'HOST': env('PGHOST'),
+      'PORT': env('PGPORT'),
    }
 }
 
@@ -125,6 +133,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_TRUSTED_ORIGINS = [
+   'http://127.0.0.1:8000',
    'https://web-production-9860.up.railway.app',
    'https://eventer.up.railway.app',
 ]
