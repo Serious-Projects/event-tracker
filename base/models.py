@@ -9,7 +9,7 @@ class User(AbstractUser):
    email = models.EmailField(unique=True)
    bio = models.TextField(null=True, blank=True)
    is_participant = models.BooleanField(default=True, null=True)
-   avatar = models.ImageField(default='default.png')
+   avatar = models.ImageField(default='default.png', upload_to='images/')
    
    USERNAME_FIELD = 'email'
    REQUIRED_FIELDS = ['username']

@@ -68,6 +68,7 @@ def confirm_registration_page(request, pk):
 
 def profile_page(request, pk):
    user = User.objects.get(id=pk)
+   print(user.avatar.url)
    return render(request, 'profile.html', {'user': user})
 
 @login_required(login_url='/login')

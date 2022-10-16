@@ -28,6 +28,8 @@ INSTALLED_APPS = [
    'django.contrib.sessions',
    'django.contrib.messages',
    'django.contrib.staticfiles',
+   'cloudinary_storage',
+   'cloudinary',
    'corsheaders',
    'widget_tweaks',
    'base',
@@ -35,9 +37,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
    'django.middleware.security.SecurityMiddleware',
-   'whitenoise.middleware.WhiteNoiseMiddleware',
    'django.contrib.sessions.middleware.SessionMiddleware',
    'corsheaders.middleware.CorsMiddleware',
+   'whitenoise.middleware.WhiteNoiseMiddleware',
    'django.middleware.common.CommonMiddleware',
    'django.middleware.csrf.CsrfViewMiddleware',
    'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -118,9 +120,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 MEDIA_URL = '/images/'
 
-STATICFILES_DIRS = [
-   BASE_DIR / 'static'
-]
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
 MEDIA_ROOT = BASE_DIR / 'static/images'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
@@ -133,3 +133,11 @@ CSRF_TRUSTED_ORIGINS = [
    'http://127.0.0.1:8000',
    'https://eventer.up.railway.app',
 ]
+
+CLOUDINARY_STORAGE = {
+   'CLOUD_NAME': env('CLOUD_NAME'),
+   'API_KEY': env('API_KEY'),
+   'API_SECRET': env('API_SECRET'),
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
