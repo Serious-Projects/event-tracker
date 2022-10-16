@@ -1,0 +1,10 @@
+.navbar-toggler-icon {
+   font-size: 1rem;
+}
+
+.user-card .user-box img {
+   width: 100px;
+   height: 100px;
+   border-radius: 50%;
+   object-fit: cover;
+}
