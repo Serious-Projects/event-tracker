@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import User, Event, Submission
-from .forms import SubmissionForm, RegistrationForm
+from .forms import SubmissionForm, RegistrationForm, EditAccountForm
 
 # Create your views here.
 def login_page(request):
@@ -59,6 +59,17 @@ def event_page(request, pk):
    return render(request, 'event.html', context)
 
 @login_required(login_url='/login')
+def edit_account(request):
+   form = EditAccountForm(instance=request.user)
+   if request.method == 'POST':
+      form = EditAccountForm(request.POST, request.FILES, instance=request.user)
+      if form.is_valid():
+         form.save()
+         return redirect('account')
+   context = {'form': form}
+   return render(request, 'user-form.html', context)
+
+@login_required(login_url='/login')
 def confirm_registration_page(request, pk):
    event = Event.objects.get(id=pk)
    if request.method == 'POST':
@@ -66,9 +77,9 @@ def confirm_registration_page(request, pk):
       return redirect('event', pk=event.id)
    return render(request, 'event-confirmation.html', {'event': event})
 
+@login_required(login_url='/login')
 def profile_page(request, pk):
    user = User.objects.get(id=pk)
-   print(user.avatar.url)
    return render(request, 'profile.html', {'user': user})
 
 @login_required(login_url='/login')

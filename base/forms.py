@@ -12,3 +12,8 @@ class RegistrationForm(UserCreationForm):
    class Meta:
       model = User
       fields = ['username', 'email', 'name', 'password1', 'password2']
+
+class EditAccountForm(ModelForm):
+   class Meta:
+      model = User
+      fields = ['username', 'email', 'avatar']

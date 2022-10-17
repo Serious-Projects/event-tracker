@@ -69,24 +69,24 @@ WSGI_APPLICATION = 'eventer.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-# DATABASES = {
-#    'default': {
-#       'ENGINE': 'django.db.backends.sqlite3',
-#       'NAME': BASE_DIR / 'db.sqlite3',
-#    }
-# }
-
-# Postgesql Database Configuration (production)
 DATABASES = {
    'default': {
-      'ENGINE': 'django.db.backends.postgresql',
-      'NAME': env('PGDATABASE'),
-      'USER': env('PGUSER'),
-      'PASSWORD': env('PGPASSWORD'),
-      'HOST': env('PGHOST'),
-      'PORT': env('PGPORT'),
+      'ENGINE': 'django.db.backends.sqlite3',
+      'NAME': BASE_DIR / 'db.sqlite3',
    }
 }
+
+# Postgesql Database Configuration (production)
+# DATABASES = {
+#    'default': {
+#       'ENGINE': 'django.db.backends.postgresql',
+#       'NAME': env('PG_DATABASE'),
+#       'USER': env('PG_USER'),
+#       'PASSWORD': env('PG_PASSWORD'),
+#       'HOST': env('PG_HOST'),
+#       'PORT': env('PG_PORT'),
+#    }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -136,8 +136,8 @@ CSRF_TRUSTED_ORIGINS = [
 
 CLOUDINARY_STORAGE = {
    'CLOUD_NAME': env('CLOUD_NAME'),
-   'API_KEY': env('API_KEY'),
-   'API_SECRET': env('API_SECRET'),
+   'API_KEY': env('CLOUD_API_KEY'),
+   'API_SECRET': env('CLOUD_API_SECRET'),
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
