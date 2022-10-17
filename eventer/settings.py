@@ -69,24 +69,24 @@ WSGI_APPLICATION = 'eventer.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-DATABASES = {
-   'default': {
-      'ENGINE': 'django.db.backends.sqlite3',
-      'NAME': BASE_DIR / 'db.sqlite3',
-   }
-}
-
-# Postgesql Database Configuration (production)
 # DATABASES = {
 #    'default': {
-#       'ENGINE': 'django.db.backends.postgresql',
-#       'NAME': env('PG_DATABASE'),
-#       'USER': env('PG_USER'),
-#       'PASSWORD': env('PG_PASSWORD'),
-#       'HOST': env('PG_HOST'),
-#       'PORT': env('PG_PORT'),
+#       'ENGINE': 'django.db.backends.sqlite3',
+#       'NAME': BASE_DIR / 'db.sqlite3',
 #    }
 # }
+
+# Postgesql Database Configuration (production)
+DATABASES = {
+   'default': {
+      'ENGINE': 'django.db.backends.postgresql',
+      'NAME': env('PG_DATABASE'),
+      'USER': env('PG_USER'),
+      'PASSWORD': env('PG_PASSWORD'),
+      'HOST': env('PG_HOST'),
+      'PORT': env('PG_PORT'),
+   }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
