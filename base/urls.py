@@ -9,9 +9,9 @@ urlpatterns = [
    # ------------------------------------------------------------------------------------------------
    # Authentication related routes
    # ------------------------------------------------------------------------------------------------
-   path('login/', views.login_page, name='login'),
-   path('register/', views.register_page, name='register'),
-   path('logout/', views.logout_page, name='logout'),
+   path('auth/login/', views.login_page, name='login'),
+   path('auth/register/', views.register_page, name='register'),
+   path('auth/logout/', views.logout_page, name='logout'),
    
    # ------------------------------------------------------------------------------------------------
    # User related routes
@@ -19,20 +19,21 @@ urlpatterns = [
    path('user/<str:pk>/', views.profile_page, name='profile'),
    
    # ------------------------------------------------------------------------------------------------
-   # Event related routes
-   # ------------------------------------------------------------------------------------------------
-   path('event/<str:pk>/', views.event_page, name='event'),
-   path('event-confirmation/<str:pk>/', views.confirm_registration_page, name='event-confirmation'),
-   
-   # ------------------------------------------------------------------------------------------------
    # Account related routes
    # ------------------------------------------------------------------------------------------------
    path('account/', views.account_page, name='account'),
-   path('edit-account/', views.edit_account, name='edit-account'),
+   path('account/edit/', views.edit_account, name='edit-account'),
+   path('account/reset-password/', views.reset_password, name='reset-password'),
    
    # ------------------------------------------------------------------------------------------------
-   # Project submission related routes
+   # Event related routes
    # ------------------------------------------------------------------------------------------------
-   path('project-submission/<str:pk>/', views.project_submission_page, name='project-submission'),
-   path('update-submission/<str:pk>/', views.update_submission, name='update-submission'),
+   path('event/<str:pk>/', views.event_page, name='event'),
+   path('event/confirmation/<str:pk>/', views.confirm_registration_page, name='event-confirmation'),
+   
+   # ------------------------------------------------------------------------------------------------
+   # Project related routes
+   # ------------------------------------------------------------------------------------------------
+   path('project/submission/<str:pk>/', views.project_submission_page, name='project-submission'),
+   path('project/update/<str:pk>/', views.update_submission, name='update-submission'),
 ]

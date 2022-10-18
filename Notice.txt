@@ -1,0 +1,16 @@
++- [Settings.py file]
+|--• Set DEBUG to False
+|--• Change database to the production one's.
+
++- [Terminal]
+|--• $ pip freeze > requirements.txt
+|--• $ python manage.py makemigration
+|--• $ python manage.py collectstatic
+
++- [Env Vars]
+|--• Update env vars on the production server. (if any)
+
++- [GIT]
+|--• $ git pull -u origin master
+|--• Prevent unwanted file(s) from pushing to GitHub. (if any)
+|--• Unstage unwanted file(s) accidentally pushed to GitHub. (if any)

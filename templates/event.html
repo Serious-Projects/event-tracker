@@ -9,8 +9,7 @@
       {% if has_registered %}
          {% if submitted %}
             <p class="py-2 ps-2 text-success border-top border-bottom">
-               You have registered for this event & 
-               You have submitted your project.
+               You have registered for this event & You have submitted your project.
             </p>
          {% else %}
             <a href="{% url 'project-submission' event.id %}" class="btn btn-secondary w-100">
@@ -18,7 +17,7 @@
             </a>
          {% endif %}
       {% else %}
-         <a href="{% url 'event-confirmation' event.id %}">Register For An Event</a>
+         <a href="{% url 'event-confirmation' event.id %}">Register For This Event »</a>
       {% endif %}
       
       <div class="mt-4">

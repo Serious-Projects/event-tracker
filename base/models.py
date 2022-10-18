@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django_resized import ResizedImageField
 
 # Create your models here.
 class User(AbstractUser):
@@ -9,7 +10,7 @@ class User(AbstractUser):
    email = models.EmailField(unique=True)
    bio = models.TextField(null=True, blank=True)
    is_participant = models.BooleanField(default=True, null=True)
-   avatar = models.ImageField(default='default_grthps.png', upload_to='images/')
+   avatar = ResizedImageField(default='default_grthps.png', upload_to='images/', size=[300, 300])
    
    USERNAME_FIELD = 'email'
    REQUIRED_FIELDS = ['username']
