@@ -36,7 +36,7 @@
    </nav>
    
    {% if messages %}
-      <div class="container mt-3">
+      <div class="container mt-3 d-flex justify-content-center">
          {% for message in messages %}
             <div class="toast align-items-center text-white border-0 {% if message.tags %} {{ message.tags }} {% endif %}" role="alert" aria-live="assertive" aria-atomic="true">
                <div class="d-flex">
@@ -58,7 +58,7 @@
    <script>
       const toastElList = Array.from(document.querySelectorAll('.toast'));
       toastElList.map(function (toastEl) {
-         return new bootstrap.Toast(toastEl, { autohide: false });
+         return new bootstrap.Toast(toastEl);
       }).forEach(toast => toast.show());
    </script>
 </body>

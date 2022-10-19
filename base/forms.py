@@ -16,4 +16,4 @@ class RegistrationForm(UserCreationForm):
 class EditAccountForm(ModelForm):
    class Meta:
       model = User
-      fields = ['username', 'email', 'avatar']
+      fields = ['username', 'email', 'bio', 'avatar']

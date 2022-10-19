@@ -1,13 +1,18 @@
 {% extends 'index.html' %}
 
 {% block content %}
-   <section id="profile-section">
+   <section id="profile-section" class="container-md mt-md-4">
       <div class="d-flex align-items-center gap-3 border-bottom pb-3">
          <div class="border-end pe-3">
-            <img src="{{ user.avatar.url }}" class="img-fluid border profile-img" alt="Profile Pic" />
+            <img
+               src="{{user.avatar.url}}"
+               class="rounded-circle profile-img"
+               alt="Profile Pic"
+               style="width:120px; height:120px; object-fit:cover;"
+            />
          </div>
          <div class="d-flex flex-column justify-content-center flex-grow-1 user-info-card">
-            <h3>{{ user.name }}</h3>
+            <h3>{{user.name}}</h3>
             {% if user.bio %}
                <p>{{ user.bio|truncatechars:80 }}</p>
             {% else %}
@@ -17,14 +22,22 @@
       </div>
       
       <div class="my-4">
-         <h4>His Registered Events</h4>
+         <h4>
+            {% if request.user.name == user.name %} You have {% else %} He has {% endif %}
+            registered for the following events
+         </h4>
          <ul class="list-group list-group-numbered">
             {% for event in user.events.all %}
                <li class="list-group-item">
                   <a href="{% url 'event' event.id %}" class="text-decoration-none">{{ event.name }}</a>
                </li>
             {% empty %}
-               <p class="ms-3"><em>He haven't registered for any events yet!</em></p>
+               <p class="ms-3">
+                  <em>
+                     {% if request.user.name == user.name %} You {% else %} He {% endif %}
+                     haven't registered for any events yet!
+                  </em>
+               </p>
             {% endfor %}
          </ul>
       </div>

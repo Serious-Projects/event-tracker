@@ -38,11 +38,19 @@
                {% for user in users %}
                   <div class="col-6 col-sm-6 col-md-3">
                      <div class="border rounded mx-auto user-card">
-                        <a href="{% url 'profile' user.id %}" class="user-box">
+                        <a href="{% url 'profile' user.id %}" class="user-box text-decoration-none">
                            <div class="rounded pb-2 text-center">
                               {% cloudinary user.avatar.url width=50 height=50 alt="Avatar Image" class="img-fluid border mt-2" %}
-                              <h6 class="mt-2">{{ user.name }}</h6>
-                              {% if user.bio %}<p>{{ user.bio }}</p>{% endif %}
+                              <h5 class="mt-2">
+                                 {% if user.name == request.user.name %}
+                                    You
+                                 {% else %}
+                                    {{user.name}}
+                                 {% endif %}
+                              </h5>
+                              {% if user.bio %}
+                                 <p>{{user.bio}}</p>
+                              {% endif %}
                            </div>
                         </a>
                      </div>

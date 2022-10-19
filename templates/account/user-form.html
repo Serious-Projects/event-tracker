@@ -1,0 +1,28 @@
+{% extends 'index.html' %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+   <h1>Edit Account</h1>
+   <div class="border rounded-circle mx-auto" style="width:130px;height:130px; background: url('{{request.user.avatar.url}}') center/cover;"></div>
+   <form method="POST" enctype="multipart/form-data" class="mb-4">
+      {% csrf_token %}
+      <div class="my-3">
+         <label for="id_avatar" class="form-label">Update Profile Picture</label>
+         <input type="file" name="avatar" id="id_avatar" accept="image/*" class="form-control" />
+      </div>
+      <div class="mb-3">
+         <label for="id_username" class="form-label">Update Username</label>
+         {% render_field form.username class="form-control" placeholder="New username" %}
+      </div>
+      <div class="mb-3">
+         <label for="id_email" class="form-label">Update Email</label>
+         {% render_field form.email class="form-control" placeholder="New email" %}
+      </div>
+      <div class="mb-3">
+         <label for="id_bio" class="form-label">Update Bio</label> 
+         {% render_field form.bio class="form-control" rows="5" placeholder="Update Bio" %}
+      </div>
+      <input type="submit" class="btn btn-info w-100" value="Update" />
+   </form>
+{% endblock content %}

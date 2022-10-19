@@ -1,0 +1,51 @@
+{% extends 'index.html' %}
+
+{% block content %}
+   <section class="container-md mt-md-4">
+      <h2 class="mb-3 text-center pb-3 border-bottom">My Account</h2>
+      
+      <div class="mb-3 w-100 d-flex justify-content-center py-2">
+         <img
+            width="150px" height="150px"
+            src="{{user.avatar.url}}" alt="User profile picture"
+            class="rounded-circle border border-info" 
+            style="object-fit: cover;"
+         />
+      </div>
+      
+      <div class="mb-4">
+         <h5>Account Actions</h5>
+         <div class="d-flex gap-2">
+            <a href="{% url 'edit-account' %}" class="btn btn-warning btn-sm px-4">Edit</a>
+            <a href="{% url 'reset-password' %}" class="btn btn-warning btn-sm">Reset Password</a>
+            <a href="{% url 'profile' user.id %}" class="btn btn-warning btn-sm">View Profile</a>
+         </div>
+      </div>
+      
+      <div class="my-4">
+         <h5>My Registered Events</h5>
+         <ul class="list-group list-group-numbered">
+            {% for event in user.events.all %}
+               <li class="list-group-item">
+                  <a href="{% url 'event' event.id %}" class="text-decoration-none">{{ event.name }}</a>
+               </li>
+            {% empty %}
+               <p>You haven't registered for any events.</p>
+            {% endfor %}
+         </ul>
+      </div>
+      
+      <div>
+         <h5>My Submissions Are For</h5>
+         <ul class="list-group list-group-numbered">
+            {% for sub in user.submissions.all %}
+               <li class="list-group-item">
+                  <a href="{% url 'update-submission' sub.id %}" class="text-decoration-none">{{ sub.event.name }}</a>
+               </li>
+            {% empty %}
+               <p>You haven't submitted any projects yet.</p>
+            {% endfor %}
+         </ul>
+      </div>
+   </section>
+{% endblock content %}

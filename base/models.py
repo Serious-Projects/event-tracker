@@ -1,4 +1,5 @@
 import uuid
+from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django_resized import ResizedImageField
@@ -14,6 +15,9 @@ class User(AbstractUser):
    
    USERNAME_FIELD = 'email'
    REQUIRED_FIELDS = ['username']
+   
+   def __str__(self) -> str:
+      return self.name
 
 class Event(models.Model):
    id = models.UUIDField(default=uuid.uuid4, primary_key=True, unique=True)
@@ -25,6 +29,11 @@ class Event(models.Model):
    registration_deadline = models.DateTimeField(null=True)
    createdAt = models.DateTimeField(auto_now_add=True)
    updatedAt = models.DateTimeField(auto_now=True)
+   
+   @property
+   def is_past_due(self):
+      today = timezone.now()
+      return today > self.registration_deadline
    
    def __str__(self) -> str:
       return self.name

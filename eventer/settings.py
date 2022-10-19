@@ -6,14 +6,16 @@ from django.contrib.messages import constants as messages
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Setting environment configurations
-env = environ.Env()
+env = environ.Env(
+   DEBUG=(bool, True)
+)
 environ.Env.read_env()
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-e0f=x%43*4ge9yuzluej&cy(-wgih=wl3b(ali5nv!*0a)cm2y'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['127.0.0.1', 'eventer.up.railway.app']
 
@@ -64,13 +66,6 @@ TEMPLATES = [
       },
    },
 ]
-
-MESSAGE_TAGS = {
-   messages.ERROR: 'bg-danger',
-   messages.INFO: 'bg-primary',
-   messages.SUCCESS: 'bg-success',
-   messages.WARNING: 'bg-info',
-}
 
 WSGI_APPLICATION = 'eventer.wsgi.application'
 
@@ -148,3 +143,10 @@ CLOUDINARY_STORAGE = {
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+MESSAGE_TAGS = {
+   messages.ERROR: 'bg-danger',
+   messages.INFO: 'bg-primary',
+   messages.SUCCESS: 'bg-success',
+   messages.WARNING: 'bg-info',
+}
