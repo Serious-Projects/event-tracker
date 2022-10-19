@@ -26,3 +26,6 @@ coverage.xml
 .venv
 env/
 venv/
+
+# Local static files
+static/
